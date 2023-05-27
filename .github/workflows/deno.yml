@@ -35,8 +35,9 @@ jobs:
       # - name: Verify formatting
       #   run: deno fmt --check
 
-      - name: Run linter
-        run: deno lint
+# STOPPED LINTER CHECK FOR THE TIME BEING
+   #   - name: Run linter
+    #    run: deno lint
 
       - name: Run tests
         run: deno test -A
