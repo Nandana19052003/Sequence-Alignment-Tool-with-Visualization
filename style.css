@@ -1,0 +1,88 @@
+body {
+  font-family: 'Press Start 2P', cursive;
+  margin: 0;
+  padding: 0;
+  background: #000 url('background.jpg') no-repeat fixed center;
+  background-size: cover;
+  color: #fff;
+}
+
+h1 {
+  text-align: center;
+  font-size: 48px;
+  text-shadow: 2px 2px #ff00ff;
+}
+
+.input-section {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sequence-input {
+  margin-bottom: 10px;
+}
+
+.score-input {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  background-color: #222;
+  color: #fff;
+  outline: none;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #ff00ff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #fff;
+  color: #ff00ff;
+}
+
+.alignment-section {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.matrix-section {
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #00ff00;
+  text-shadow: 1px 1px #000;
+}
+
+.mismatch {
+  color: #ff0000;
+  text-shadow: 1px 1px #000;
+}
