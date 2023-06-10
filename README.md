@@ -1,6 +1,7 @@
 # Sequence-Alignment-Tool-with-Visualization
 
-Project done my
+Project done by <br>
+
 Nandana - 21
 
 Santhosh - 42
