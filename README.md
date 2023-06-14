@@ -1,5 +1,7 @@
 # Sequence-Alignment-Tool-with-Visualization
 
+https://docs.google.com/document/d/1mWQY7a2S40Hcw6PpRgk_4wo35-42QFqKFROuQWNfVxc/edit?usp=sharing
+
 Project done by <br>
 
 Nandana - 21021
