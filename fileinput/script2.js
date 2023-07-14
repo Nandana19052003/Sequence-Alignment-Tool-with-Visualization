@@ -7,10 +7,11 @@ function alignSequences() {
   var mismatchScore = parseInt(document.getElementById('mismatchScore').value);
   var gapScore = parseInt(document.getElementById('gapScore').value);
 
-  var alignmentResult = performSmithWaterman(sequence1, sequence2, matchScore, mismatchScore, gapScore);
+  // Perform sequence alignment
+  var alignment = smithWaterman(sequence1, sequence2, matchScore, mismatchScore, gapScore);
 
-  document.getElementById('alignmentResult').innerHTML = alignmentResult.alignment;
-  document.getElementById('alignmentScore').innerHTML = 'Score: ' + alignmentResult.score;
+  // Display alignment result
+  document.getElementById('alignmentResult').textContent = alignment.result;
 
   // Display alignment matrix
   var matrixHtml = '';
@@ -88,3 +89,4 @@ function smithWaterman(sequence1, sequence2, matchScore, mismatchScore, gapScore
 
   return alignment;
 }
+

@@ -1,4 +1,3 @@
-// JavaScript code
 function alignSequences() {
   var sequence1 = document.getElementById('sequence1').value;
   var sequence2 = document.getElementById('sequence2').value;
@@ -6,10 +5,12 @@ function alignSequences() {
   var mismatchScore = parseInt(document.getElementById('mismatchScore').value);
   var gapScore = parseInt(document.getElementById('gapScore').value);
 
-  var alignmentResult = performNeedlemanWunsch(sequence1, sequence2, matchScore, mismatchScore, gapScore); // or performSmithWaterman(sequence1, sequence2);
+  var alignmentResult = performNeedlemanWunsch(sequence1, sequence2, matchScore, mismatchScore, gapScore);
 
-  document.getElementById('alignmentResult').innerHTML = alignmentResult;
+  document.getElementById('alignmentResult').innerHTML = alignmentResult.alignment;
+  document.getElementById('alignmentScore').innerHTML = 'Score: ' + alignmentResult.score;
 }
+
 
 function clearAlignment() {
   document.getElementById('sequence1').value = '';
@@ -71,19 +72,24 @@ function performNeedlemanWunsch(sequence1, sequence2, matchScore, mismatchScore,
   i = sequence1.length;
   j = sequence2.length;
   while (i > 0 && j > 0) {
-    if (matrix[i][j] === matrix[i - 1][j - 1] + (sequence1[i - 1] === sequence2[j - 1] ? matchScore : mismatchScore)) {
+    var currentScore = matrix[i][j];
+    var diagonalScore = matrix[i - 1][j - 1];
+    var topScore = matrix[i - 1][j];
+    var leftScore = matrix[i][j - 1];
+
+    if (currentScore === diagonalScore + (sequence1[i - 1] === sequence2[j - 1] ? matchScore : mismatchScore)) {
       alignment1 = sequence1[i - 1] + alignment1;
       alignment2 = sequence2[j - 1] + alignment2;
       i--;
       j--;
-    } else if (matrix[i][j] === matrix[i - 1][j] + gapScore) {
-      alignment1 = sequence1[i - 1] + alignment1;
-      alignment2 = '-' + alignment2;
-      i--;
-    } else {
+    } else if (currentScore === topScore + gapScore) {
       alignment1 = '-' + alignment1;
       alignment2 = sequence2[j - 1] + alignment2;
       j--;
+    } else {
+      alignment1 = sequence1[i - 1] + alignment1;
+      alignment2 = '-' + alignment2;
+      i--;
     }
   }
 
@@ -110,125 +116,12 @@ function performNeedlemanWunsch(sequence1, sequence2, matchScore, mismatchScore,
     }
   }
 
-  return alignmentResult + '<br>' + alignment2;
-}
+  // Calculate the alignment score
+  var alignmentScore = matrix[sequence1.length][sequence2.length];
 
-
-function startVisualization() {
-  var sequence1 = document.getElementById('sequence1').value;
-  var sequence2 = document.getElementById('sequence2').value;
-
-  if (sequence1 && sequence2) {
-    var alignmentResult = visualizeSmithWaterman(sequence1, sequence2);
-
-    var visualizationSection = document.getElementById('visualization-section');
-    visualizationSection.innerHTML = '';
-
-    var alignmentMatrix = document.createElement('div');
-    alignmentMatrix.id = 'alignment-matrix';
-    alignmentMatrix.innerHTML = alignmentResult.matrix;
-    visualizationSection.appendChild(alignmentMatrix);
-
-    var alignmentResultDiv = document.createElement('div');
-    alignmentResultDiv.id = 'alignment-result';
-    alignmentResultDiv.textContent = alignmentResult.alignmentResult;
-    visualizationSection.appendChild(alignmentResultDiv);
-
-    visualizationSection.classList.remove('hidden');
-  }
-}
-
-function visualizeSmithWaterman(sequence1, sequence2) {
-  // Calculate the alignment matrix and perform traceback
-  var matrix = []; // Alignment matrix
-  var maxScore = 0; // Maximum score
-  var maxScorePos = { row: 0, col: 0 }; // Position of the maximum score
-  var alignmentResult = ''; // Alignment result string
-
-  // Initialize the alignment matrix with zeros
-  for (var i = 0; i <= sequence1.length; i++) {
-    matrix[i] = [];
-    for (var j = 0; j <= sequence2.length; j++) {
-      matrix[i][j] = 0;
-    }
-  }
-
-  // Perform the Smith-Waterman algorithm
-  for (var i = 1; i <= sequence1.length; i++) {
-    for (var j = 1; j <= sequence2.length; j++) {
-      if (sequence1[i - 1] === sequence2[j - 1]) {
-        // Match
-        var matchScore = 1;
-        matrix[i][j] = Math.max(
-          0,
-          matrix[i - 1][j - 1] + matchScore,
-          matrix[i][j - 1] - 1,
-          matrix[i - 1][j] - 1
-        );
-      } else {
-        // Mismatch
-        var mismatchScore = -1;
-        matrix[i][j] = Math.max(
-          0,
-          matrix[i - 1][j - 1] + mismatchScore,
-          matrix[i][j - 1] - 1,
-          matrix[i - 1][j] - 1
-        );
-      }
-
-      // Update the maximum score and its position
-      if (matrix[i][j] > maxScore) {
-        maxScore = matrix[i][j];
-        maxScorePos = { row: i, col: j };
-      }
-    }
-  }
-
-  // Perform traceback to generate the alignment result
-  var row = maxScorePos.row;
-  var col = maxScorePos.col;
-
-  while (matrix[row][col] !== 0) {
-    if (sequence1[row - 1] === sequence2[col - 1]) {
-      alignmentResult = sequence1[row - 1] + alignmentResult;
-    } else {
-      alignmentResult = '-' + alignmentResult;
-    }
-
-    var currentScore = matrix[row][col];
-    var diagonalScore = matrix[row - 1][col - 1];
-    var leftScore = matrix[row][col - 1];
-    var topScore = matrix[row - 1][col];
-
-    if (currentScore === diagonalScore + 1 && sequence1[row - 1] === sequence2[col - 1]) {
-      row--;
-      col--;
-    } else if (currentScore === diagonalScore - 1) {
-      row--;
-      col--;
-    } else if (currentScore === leftScore - 1) {
-      col--;
-    } else if (currentScore === topScore - 1) {
-      row--;
-    }
-  }
-
-  // Return the alignment result and matrix
+  // Return the alignment result and score
   return {
-    alignmentResult: alignmentResult,
-    matrix: getMatrixHTML(matrix),
+    alignment: alignmentResult + '<br>' + alignment2,
+    score: alignmentScore
   };
-}
-
-function getMatrixHTML(matrix) {
-  var html = '<table>';
-  for (var i = 0; i < matrix.length; i++) {
-    html += '<tr>';
-    for (var j = 0; j < matrix[i].length; j++) {
-      html += '<td>' + matrix[i][j] + '</td>';
-    }
-    html += '</tr>';
-  }
-  html += '</table>';
-  return html;
 }

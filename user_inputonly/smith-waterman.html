@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Smith-Waterman Algorithm Visualization</title>
+  <title>Sequence Alignment Visualization</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <h1 class="animate">Smith-Waterman Algorithm Visualization</h1>
+  <h1 class="animate">Sequence Alignment Visualization</h1>
 
   <div class="input-section">
     <div class="sequence-input">
       <label for="sequence1">Sequence 1:</label>
-      <input type="text" id="sequence1" placeholder="Enter sequence 1">
+      <input type="text" id="sequence1" placeholder="Enter sequence 1" value="AAGGTT">
     </div>
 
     <div class="sequence-input">
       <label for="sequence2">Sequence 2:</label>
-      <input type="text" id="sequence2" placeholder="Enter sequence 2">
+      <input type="text" id="sequence2" placeholder="Enter sequence 2" value="ACGGTTTTT">
     </div>
 
     <div class="score-input">
@@ -30,7 +30,7 @@
 
     <div class="score-input">
       <label for="gapScore">Gap Score:</label>
-      <input type="number" id="gapScore" value="-2">
+      <input type="number" id="gapScore" value="-1">
     </div>
 
     <button onclick="alignSequences()">Compute Optimal Alignment</button>
@@ -40,6 +40,8 @@
   <div class="alignment-section">
     <h2 class="animate">Alignment Result:</h2>
     <pre id="alignmentResult"></pre>
+    <h2 class="animate">Alignment Score:</h2>
+    <p id="alignmentScore"></p>
   </div>
 
   <div class="matrix-section">

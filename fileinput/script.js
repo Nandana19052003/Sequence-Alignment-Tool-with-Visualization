@@ -1,3 +1,4 @@
+// JavaScript code
 function alignSequences() {
   var sequence1 = document.getElementById('sequence1').value;
   var sequence2 = document.getElementById('sequence2').value;
@@ -5,12 +6,10 @@ function alignSequences() {
   var mismatchScore = parseInt(document.getElementById('mismatchScore').value);
   var gapScore = parseInt(document.getElementById('gapScore').value);
 
-  var alignmentResult = performNeedlemanWunsch(sequence1, sequence2, matchScore, mismatchScore, gapScore);
+  var alignmentResult = performNeedlemanWunsch(sequence1, sequence2, matchScore, mismatchScore, gapScore); // or performSmithWaterman(sequence1, sequence2);
 
-  document.getElementById('alignmentResult').innerHTML = alignmentResult.alignment;
-  document.getElementById('alignmentScore').innerHTML = 'Score: ' + alignmentResult.score;
+  document.getElementById('alignmentResult').innerHTML = alignmentResult;
 }
-
 
 function clearAlignment() {
   document.getElementById('sequence1').value = '';
