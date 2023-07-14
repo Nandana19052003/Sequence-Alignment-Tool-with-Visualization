@@ -59,6 +59,22 @@ button:hover {
   color: #ff00ff;
 }
 
+.choose-file-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #ff00ff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.choose-file-button:hover {
+  background-color: #fff;
+  color: #ff00ff;
+}
+
 .alignment-section {
   margin-bottom: 20px;
   text-align: center;

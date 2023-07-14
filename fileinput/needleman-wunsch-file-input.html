@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Smith-Waterman Algorithm Visualization</title>
+  <title>Sequence Alignment Visualization</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <h1 class="animate">Smith-Waterman Algorithm Visualization</h1>
+  <h1 class="animate">Sequence Alignment Visualization</h1>
 
   <div class="input-section">
     <div class="sequence-input">
       <label for="sequence1">Sequence 1:</label>
+      <input type="file" id="sequence1FileInput" accept=".txt" onchange="loadSequence(event, 'sequence1')">
+      <button onclick="document.getElementById('sequence1FileInput').click()">Choose File</button>
       <input type="text" id="sequence1" placeholder="Enter sequence 1">
     </div>
 
     <div class="sequence-input">
       <label for="sequence2">Sequence 2:</label>
+      <input type="file" id="sequence2FileInput" accept=".txt" onchange="loadSequence(event, 'sequence2')">
+      <button onclick="document.getElementById('sequence2FileInput').click()">Choose File</button>
       <input type="text" id="sequence2" placeholder="Enter sequence 2">
     </div>
 
@@ -40,13 +44,17 @@
   <div class="alignment-section">
     <h2 class="animate">Alignment Result:</h2>
     <pre id="alignmentResult"></pre>
+    <div id="alignmentScore"></div>
   </div>
+  
+  
 
   <div class="matrix-section">
     <h2 class="animate">Alignment Matrix:</h2>
     <table id="alignmentMatrix"></table>
   </div>
 
-  <script src="script2.js"></script>
+  <script src="nw1.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
 </body>
 </html>
