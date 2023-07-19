@@ -14,6 +14,9 @@ IndraKiran - 21078
 
 # Sequence Alignment using Needleman-Wunsch and Smith-Waterman Algorithms
 
+## GUI LINK:
+https://76ce2fc2.sequence-alignment-tool-with-visualization.pages.dev/
+
 Sequence alignment is a fundamental problem in bioinformatics used to identify similarities and differences between biological sequences. The Needleman-Wunsch and Smith-Waterman algorithms are popular dynamic programming algorithms used for global and local sequence alignment, respectively. In this project, we implemented both algorithms, compared their performances on different datasets, and analyzed their accuracy, computational complexity, and memory requirements.
 
 
